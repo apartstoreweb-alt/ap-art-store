@@ -398,7 +398,7 @@ function render(){
     return;
   }
   document.getElementById('grid').innerHTML = filtered.map(p => {
-    const disc   = p.mrp > p.price ? Math.round((1 - p.price/p.mrp)*100) : 0;
+    const disc   = p.mrp > p.price ? Math.round(p.mrp - p.price) : 0;
     const inCart = !!cart[p.id];
     const imgHtml = p.image
       ? `<img src="${p.image}" alt="${esc(p.name)}" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentNode.querySelector('.no-img').style.display='flex'"><div class="no-img" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>No Image</span></div>`
@@ -408,7 +408,7 @@ function render(){
       <div class="card-img">
         ${imgHtml}
         ${p.qty === 0 ? '<span class="badge-out">Out of Stock</span>' : ''}
-        ${disc >= 5 ? `<span class="badge-off">${disc}% OFF</span>` : ''}
+        ${disc >= 5 ? `<span class="badge-off">Save ₹${disc}</span>` : ''}
       </div>
       <div class="card-body">
         <div class="card-cat">${esc(p.category)}</div>
@@ -416,7 +416,7 @@ function render(){
         <div class="price-row">
           <span class="p-sell">₹${p.price}</span>
           ${p.mrp > p.price ? `<span class="p-mrp">₹${p.mrp}</span>` : ''}
-          ${disc >= 5 ? `<span class="p-save">Save ${disc}%</span>` : ''}
+          ${disc >= 5 ? `<span class="p-save">Save ₹${disc}</span>` : ''}
         </div>
         ${p.qty > 0 && p.qty <= 5 ? `<div class="stock-low">⚠ Only ${p.qty} left!</div>` : ''}
         <button class="add-btn${inCart ? ' added' : ''}" onclick="addToCart('${p.id}')" ${p.qty === 0 ? 'disabled' : ''}>
