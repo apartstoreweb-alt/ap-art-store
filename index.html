@@ -192,12 +192,8 @@ hr.div{border:none;border-top:1px solid var(--border);margin:10px 0}
       <div class="sec-title" id="secTitle">All Products</div>
       <div class="sec-meta" id="secMeta">Loading…</div>
     </div>
-    <select class="sort-sel" onchange="applySort(this.value)">
-      <option value="default">Sort: Default</option>
-      <option value="price-asc">Price: Low → High</option>
-      <option value="price-desc">Price: High → Low</option>
-      <option value="name">Name: A → Z</option>
-      <option value="discount">Best Discount</option>
+    <select class="sort-sel" id="catDropdown" onchange="selectCatDropdown(this.value)">
+      <option value="All">🎨 All Categories</option>
     </select>
   </div>
   <div class="grid" id="grid">
@@ -344,6 +340,23 @@ function buildTabs(){
       ${esc(c)}<span class="cat-pill">${count(c)}</span>
     </button>`
   ).join('');
+  // populate category dropdown
+  const dd = document.getElementById('catDropdown');
+  if(dd){
+    dd.innerHTML = cats.map(c =>
+      `<option value="${c}">${c === 'All' ? '🎨 All Categories' : c} (${count(c)})</option>`
+    ).join('');
+  }
+}
+
+function selectCatDropdown(val){
+  // sync tab bar
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  const tab = [...document.querySelectorAll('.cat-tab')].find(b => b.textContent.trim().startsWith(val === 'All' ? 'All' : val));
+  if(tab) tab.classList.add('active');
+  activeCat = val;
+  document.getElementById('secTitle').textContent = val === 'All' ? 'All Products' : val;
+  applyFilters();
 }
 
 function selectCat(btn, cat){
@@ -352,6 +365,9 @@ function selectCat(btn, cat){
   activeCat = cat;
   document.getElementById('secTitle').textContent = cat === 'All' ? 'All Products' : cat;
   btn.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  // sync dropdown
+  const dd = document.getElementById('catDropdown');
+  if(dd) dd.value = cat;
   applyFilters();
 }
 
