@@ -270,9 +270,10 @@ function parseCSV(txt){
     const c = splitRow(row);
     const name  = (c[iName]  || '').trim();
     const cat   = (c[iCat]   || 'Other').trim();
+    const cleanNum = s => parseFloat((s||'').replace(/[₹,\s]/g,'')) || 0;
     const qty   = parseInt(c[iQty]) || 0;
-    const mrp   = parseFloat(c[iMrp]) || 0;
-    const price = parseFloat(c[iPrice]) || mrp;
+    const mrp   = cleanNum(c[iMrp]);
+    const price = cleanNum(c[iPrice]) || mrp;
     const image = driveImg(c[iImg] || '');
     if(name && mrp > 0) acc.push({ id:'p'+(acc.length+1), name, category:cat, qty, mrp, price, image });
     return acc;
