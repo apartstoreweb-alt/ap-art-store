@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Art Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B3E;
+  --orange:#E85C1A;
+  --orangeL:#FF7241;
+  --yellow:#F0A500;
+  --teal:#1A7BB8;
+  --tealL:#3BAFD4;
+  --green:#1FAD5E;
+  --off:#F7F4EF;
+  --white:#FFFFFF;
+  --border:#E4DDD4;
+  --txt:#1C1C2E;
+  --txt2:#6B6B88;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Nunito',sans-serif;background:var(--off);color:var(--txt);min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.hdr{max-width:1140px;margin:0 auto;padding:0 16px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.brand-icon{width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--yellow) 55%,var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:16px;color:#fff;letter-spacing:.5px}
+.brand-name{font-family:'Bebas Neue';font-size:22px;color:#fff;letter-spacing:2px;line-height:1}
+.brand-sub{font-size:9px;font-weight:800;letter-spacing:2.5px;color:var(--tealL);text-transform:uppercase;line-height:1}
+.search-wrap{flex:1;max-width:360px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:30px;padding:7px 16px;display:flex;align-items:center;gap:8px}
+.search-wrap input{background:none;border:none;outline:none;color:#fff;font-family:'Nunito';font-size:14px;width:100%}
+.search-wrap input::placeholder{color:rgba(255,255,255,.38)}
+.cart-btn{background:var(--orange);border:none;border-radius:30px;padding:9px 18px;color:#fff;font-family:'Nunito';font-weight:800;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s;white-space:nowrap;flex-shrink:0}
+.cart-btn:hover{background:var(--orangeL)}
+.cart-badge{background:#fff;color:var(--orange);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;min-width:22px}
+.badge-bump{animation:bump .3s ease}
+@keyframes bump{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+
+/* HERO */
+.hero{background:var(--navy);padding:30px 16px 26px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 15% 60%,rgba(232,92,26,.18) 0%,transparent 55%),radial-gradient(ellipse at 85% 30%,rgba(26,123,184,.16) 0%,transparent 55%),radial-gradient(ellipse at 55% 90%,rgba(240,165,0,.12) 0%,transparent 50%);pointer-events:none}
+.hero h1{font-family:'Bebas Neue';font-size:clamp(36px,7vw,72px);color:#fff;letter-spacing:4px;line-height:.92;margin-bottom:10px;position:relative}
+.hero h1 em{color:var(--orange);font-style:normal}
+.hero p{color:rgba(255,255,255,.55);font-size:14px;position:relative;font-weight:600}
+
+/* CATEGORY TABS */
+.cats-outer{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:80;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.cats-scroll{max-width:1140px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cats-scroll::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;background:none;border:none;padding:12px 14px;font-family:'Nunito';font-size:13px;font-weight:700;color:var(--txt2);cursor:pointer;position:relative;transition:color .2s;white-space:nowrap}
+.cat-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--orange);border-radius:3px 3px 0 0;transform:scaleX(0);transition:transform .2s}
+.cat-tab:hover{color:var(--txt)}
+.cat-tab.active{color:var(--orange)}
+.cat-tab.active::after{transform:scaleX(1)}
+.cat-pill{display:inline-flex;align-items:center;justify-content:center;background:var(--off);border-radius:20px;padding:1px 7px;font-size:10px;font-weight:800;margin-left:4px;color:var(--txt2)}
+.cat-tab.active .cat-pill{background:rgba(232,92,26,.12);color:var(--orange)}
+
+/* MAIN */
+.main{max-width:1140px;margin:0 auto;padding:22px 16px 80px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.sec-title{font-family:'Bebas Neue';font-size:28px;letter-spacing:1px;color:var(--navy)}
+.sec-meta{font-size:13px;color:var(--txt2);font-weight:600}
+.sort-sel{padding:8px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Nunito';font-size:13px;font-weight:700;color:var(--txt);background:var(--white);cursor:pointer;outline:none}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:16px}
+
+/* CARD */
+.card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(13,27,62,.09);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;position:relative}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(13,27,62,.17)}
+.card-img{width:100%;aspect-ratio:1;background:linear-gradient(135deg,#f0e8d8,#e8d5c0);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;flex-shrink:0}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.card:hover .card-img img{transform:scale(1.06)}
+.no-img{display:flex;flex-direction:column;align-items:center;gap:6px;color:#c5b9a8}
+.no-img svg{width:38px;height:38px;opacity:.55}
+.no-img span{font-size:10px;font-weight:700;letter-spacing:.5px;opacity:.7}
+.badge-out{position:absolute;top:8px;left:8px;background:rgba(200,30,30,.88);color:#fff;font-size:9px;font-weight:900;letter-spacing:.8px;padding:3px 8px;border-radius:6px;text-transform:uppercase}
+.badge-off{position:absolute;top:8px;right:8px;background:var(--orange);color:#fff;font-size:10px;font-weight:900;padding:3px 8px;border-radius:6px}
+.card-body{padding:12px 13px 14px;flex:1;display:flex;flex-direction:column}
+.card-cat{font-size:9.5px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.card-name{font-size:13px;font-weight:700;line-height:1.35;color:var(--txt);flex:1;margin-bottom:8px}
+.price-row{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.p-sell{font-size:17px;font-weight:900;color:var(--navy)}
+.p-mrp{font-size:12px;font-weight:600;color:#bbb;text-decoration:line-through}
+.p-save{font-size:10px;font-weight:800;color:var(--green);background:#e6f7ee;padding:2px 6px;border-radius:5px}
+.stock-low{font-size:11px;font-weight:700;color:#d07000;margin-bottom:8px}
+.add-btn{width:100%;border:none;border-radius:10px;padding:9px 6px;font-family:'Nunito';font-size:13px;font-weight:800;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:5px;background:var(--navy);color:#fff}
+.add-btn:hover:not(:disabled){background:var(--orange)}
+.add-btn:disabled{background:#ddd;color:#aaa;cursor:not-allowed}
+.add-btn.added{background:var(--teal)}
+
+/* STATES */
+.loading-wrap{grid-column:1/-1;text-align:center;padding:80px 20px}
+.dots{display:flex;gap:10px;justify-content:center;margin-bottom:16px}
+.dots span{width:12px;height:12px;border-radius:50%;animation:dot 1.2s infinite ease-in-out}
+.dots span:nth-child(1){background:var(--orange)}
+.dots span:nth-child(2){background:var(--teal);animation-delay:.2s}
+.dots span:nth-child(3){background:var(--yellow);animation-delay:.4s}
+@keyframes dot{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+.empty-wrap{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--txt2);font-weight:700}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:all}
+
+/* CART DRAWER */
+.drawer{position:fixed;top:0;right:0;width:430px;max-width:100vw;height:100dvh;background:var(--white);z-index:201;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .36s cubic-bezier(.4,0,.2,1);box-shadow:-6px 0 40px rgba(0,0,0,.18)}
+.drawer.open{transform:translateX(0)}
+.drawer-head{padding:18px 20px;background:var(--navy);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.drawer-head h2{font-family:'Bebas Neue';font-size:24px;letter-spacing:2px;color:#fff}
+.x-btn{width:36px;height:36px;background:rgba(255,255,255,.1);border:none;border-radius:50%;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1}
+.x-btn:hover{background:rgba(255,255,255,.22)}
+.drawer-items{flex:1;overflow-y:auto;padding:12px}
+.cart-empty-msg{text-align:center;padding:70px 20px;color:var(--txt2)}
+.cart-empty-msg svg{width:64px;height:64px;margin:0 auto 16px;opacity:.25;display:block}
+.cart-empty-msg p{font-weight:700;font-size:15px}
+.ci{display:flex;align-items:center;gap:11px;padding:12px;border-radius:12px;margin-bottom:8px;background:var(--off)}
+.ci-img{width:58px;height:58px;border-radius:9px;overflow:hidden;background:linear-gradient(135deg,#f0e8d8,#e8d5c0);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:12.5px;font-weight:700;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-price{font-size:12px;font-weight:800;color:var(--orange);margin-top:3px}
+.ci-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.q-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--txt);line-height:1;transition:border-color .15s,color .15s}
+.q-btn:hover{border-color:var(--orange);color:var(--orange)}
+.q-val{font-size:14px;font-weight:900;min-width:18px;text-align:center}
+.del-btn{width:28px;height:28px;border:none;background:#fee5e5;color:#c33;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:background .15s}
+.del-btn:hover{background:#ffc8c8}
+.drawer-foot{padding:16px 20px;border-top:1px solid var(--border);background:var(--white);flex-shrink:0}
+.tot-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.tot-lbl{font-size:13px;font-weight:600;color:var(--txt2)}
+.tot-val{font-size:13px;font-weight:700}
+hr.div{border:none;border-top:1px solid var(--border);margin:10px 0}
+.grand-lbl{font-size:15px;font-weight:800}
+.grand-val{font-size:22px;font-weight:900;color:var(--navy)}
+.note-inp{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;font-family:'Nunito';font-size:13px;resize:none;outline:none;color:var(--txt);margin:12px 0;transition:border-color .2s}
+.note-inp:focus{border-color:var(--teal)}
+.wa-btn{width:100%;background:#25D366;color:#fff;border:none;border-radius:12px;padding:14px;font-family:'Nunito';font-size:15px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s,transform .15s}
+.wa-btn:hover:not(:disabled){background:#1eba58;transform:translateY(-1px)}
+.wa-btn:disabled{background:#ccc;cursor:not-allowed}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:30px;font-weight:800;font-size:13.5px;opacity:0;transition:all .28s;z-index:400;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .search-wrap{display:none}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .main{padding:16px 12px 80px}
+}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr">
+    <a class="brand" href="#">
+      <div class="brand-icon">AP</div>
+      <div>
+        <div class="brand-name">AP ART STORE</div>
+        <div class="brand-sub">Premium Art Supplies</div>
+      </div>
+    </a>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="searchInput" type="text" placeholder="Search products…" oninput="applyFilters()">
+    </div>
+    <button class="cart-btn" onclick="openCart()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Cart <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>AP <em>ART</em><br>STORE</h1>
+  <p>Colours · Canvas · Brushes · Everything you create with</p>
+</div>
+
+<div class="cats-outer">
+  <div class="cats-scroll" id="catTabs"></div>
+</div>
+
+<div class="main">
+  <div class="sec-head">
+    <div>
+      <div class="sec-title" id="secTitle">All Products</div>
+      <div class="sec-meta" id="secMeta">Loading…</div>
+    </div>
+    <select class="sort-sel" onchange="applySort(this.value)">
+      <option value="default">Sort: Default</option>
+      <option value="price-asc">Price: Low → High</option>
+      <option value="price-desc">Price: High → Low</option>
+      <option value="name">Name: A → Z</option>
+      <option value="discount">Best Discount</option>
+    </select>
+  </div>
+  <div class="grid" id="grid">
+    <div class="loading-wrap">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <p style="color:var(--txt2);font-weight:700">Loading products…</p>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h2>🛒 Your Cart</h2>
+    <button class="x-btn" onclick="closeCart()">✕</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="tot-row"><span class="tot-lbl">MRP Total</span><span class="tot-val" id="mrpTot">₹0</span></div>
+    <div class="tot-row"><span class="tot-lbl">You Save</span><span class="tot-val" style="color:var(--green)" id="saveTot">₹0</span></div>
+    <hr class="div">
+    <div class="tot-row"><span class="grand-lbl">Total Payable</span><span class="grand-val" id="grandTot">₹0</span></div>
+    <textarea class="note-inp" id="noteInp" rows="2" placeholder="Delivery address or note (optional)…"></textarea>
+    <button class="wa-btn" id="waBtn" onclick="sendOrder()" disabled>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Order via WhatsApp
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SHEET = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vROexACtYfXp6F5bv0DYPlAUPCrJtdFahUbZE0hpidMx7jxB35SeMEbzLjzmEd44n4d4A9U9_QxCHI9/pub?gid=0&single=true&output=csv';
+const WA    = '919056656851';
+
+let products = [], filtered = [], cart = {}, activeCat = 'All', sortMode = 'default';
+
+// Convert any Google Drive share link to a thumbnail URL
+function driveImg(url){
+  if(!url || !url.trim()) return '';
+  url = url.trim();
+  const m1 = url.match(/\/d\/([\w-]+)/);
+  if(m1) return `https://drive.google.com/thumbnail?id=${m1[1]}&sz=w400`;
+  try{
+    const u = new URL(url);
+    const id = u.searchParams.get('id');
+    if(id) return `https://drive.google.com/thumbnail?id=${id}&sz=w400`;
+  }catch(e){}
+  if(url.startsWith('http')) return url;
+  return '';
+}
+
+// Parse CSV text — handles quoted commas
+function parseCSV(txt){
+  const rows = txt.trim().split(/\r?\n/);
+  if(rows.length < 2) return [];
+  const headers = splitRow(rows[0]).map(h => h.toLowerCase().trim());
+  const col = (...keys) => keys.map(k => headers.indexOf(k)).find(i => i !== -1) ?? -1;
+
+  const iName  = col('name','product');
+  const iCat   = col('category','cat');
+  const iQty   = col('qty','quantity','stock');
+  const iMrp   = col('mrp');
+  const iPrice = col('selling price','price','sell');
+  const iImg   = col('image','img','photo');
+
+  return rows.slice(1).reduce((acc, row) => {
+    const c = splitRow(row);
+    const name  = (c[iName]  || '').trim();
+    const cat   = (c[iCat]   || 'Other').trim();
+    const qty   = parseInt(c[iQty]) || 0;
+    const mrp   = parseFloat(c[iMrp]) || 0;
+    const price = parseFloat(c[iPrice]) || mrp;
+    const image = driveImg(c[iImg] || '');
+    if(name && mrp > 0) acc.push({ id:'p'+(acc.length+1), name, category:cat, qty, mrp, price, image });
+    return acc;
+  }, []);
+}
+
+function splitRow(row){
+  const cells = []; let cur = ''; let q = false;
+  for(const ch of row){
+    if(ch === '"'){ q = !q; continue; }
+    if(ch === ',' && !q){ cells.push(cur.trim()); cur = ''; continue; }
+    cur += ch;
+  }
+  cells.push(cur.trim());
+  return cells;
+}
+
+// Escape HTML
+function esc(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// No-image placeholder
+function noImgHTML(){
+  return `<div class="no-img">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span>No Image</span>
+  </div>`;
+}
+
+// ── LOAD ──
+async function init(){
+  try{
+    const r = await fetch(SHEET);
+    if(!r.ok) throw new Error();
+    const txt = await r.text();
+    products = parseCSV(txt);
+    if(!products.length) throw new Error();
+  } catch(e){
+    document.getElementById('grid').innerHTML = `<div class="empty-wrap">⚠️ Could not load products. Please refresh the page.</div>`;
+    document.getElementById('secMeta').textContent = '';
+    return;
+  }
+  buildTabs();
+  applyFilters();
+}
+
+// ── TABS ──
+function buildTabs(){
+  const cats = ['All', ...[...new Set(products.map(p => p.category))].sort()];
+  const count = c => c === 'All' ? products.length : products.filter(p => p.category === c).length;
+  document.getElementById('catTabs').innerHTML = cats.map((c,i) =>
+    `<button class="cat-tab${i===0?' active':''}" onclick="selectCat(this,'${c.replace(/'/g,"\\'")}')">
+      ${esc(c)}<span class="cat-pill">${count(c)}</span>
+    </button>`
+  ).join('');
+}
+
+function selectCat(btn, cat){
+  document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = cat;
+  document.getElementById('secTitle').textContent = cat === 'All' ? 'All Products' : cat;
+  btn.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  applyFilters();
+}
+
+// ── FILTER + SORT ──
+function applyFilters(){
+  const q = (document.getElementById('searchInput').value || '').toLowerCase();
+  filtered = products.filter(p =>
+    (activeCat === 'All' || p.category === activeCat) &&
+    (!q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q))
+  );
+  doSort(); render();
+}
+
+function applySort(mode){ sortMode = mode; doSort(); render(); }
+
+function doSort(){
+  if(sortMode === 'price-asc')  filtered.sort((a,b) => a.price - b.price);
+  if(sortMode === 'price-desc') filtered.sort((a,b) => b.price - a.price);
+  if(sortMode === 'name')       filtered.sort((a,b) => a.name.localeCompare(b.name));
+  if(sortMode === 'discount')   filtered.sort((a,b) => (b.mrp-b.price)/b.mrp - (a.mrp-a.price)/a.mrp);
+}
+
+// ── RENDER ──
+function render(){
+  document.getElementById('secMeta').textContent = `${filtered.length} product${filtered.length !== 1 ? 's' : ''}`;
+  if(!filtered.length){
+    document.getElementById('grid').innerHTML = `<div class="empty-wrap">No products found.</div>`;
+    return;
+  }
+  document.getElementById('grid').innerHTML = filtered.map(p => {
+    const disc   = p.mrp > p.price ? Math.round((1 - p.price/p.mrp)*100) : 0;
+    const inCart = !!cart[p.id];
+    const imgHtml = p.image
+      ? `<img src="${p.image}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.insertAdjacentHTML('afterend',\`${noImgHTML().replace(/`/g,'\\`')}\`)">`
+      : noImgHTML();
+    return `
+    <div class="card">
+      <div class="card-img">
+        ${imgHtml}
+        ${p.qty === 0 ? '<span class="badge-out">Out of Stock</span>' : ''}
+        ${disc >= 5 ? `<span class="badge-off">${disc}% OFF</span>` : ''}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${esc(p.category)}</div>
+        <div class="card-name">${esc(p.name)}</div>
+        <div class="price-row">
+          <span class="p-sell">₹${p.price}</span>
+          ${p.mrp > p.price ? `<span class="p-mrp">₹${p.mrp}</span>` : ''}
+          ${disc >= 5 ? `<span class="p-save">Save ${disc}%</span>` : ''}
+        </div>
+        ${p.qty > 0 && p.qty <= 5 ? `<div class="stock-low">⚠ Only ${p.qty} left!</div>` : ''}
+        <button class="add-btn${inCart ? ' added' : ''}" onclick="addToCart('${p.id}')" ${p.qty === 0 ? 'disabled' : ''}>
+          ${p.qty === 0 ? 'Out of Stock' : inCart ? '✓ Added' : '＋ Add to Cart'}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── CART LOGIC ──
+function addToCart(id){
+  const p = products.find(x => x.id === id);
+  if(!p || p.qty === 0) return;
+  if(!cart[id]) cart[id] = { ...p, cartQty: 0 };
+  if(cart[id].cartQty < p.qty) cart[id].cartQty++;
+  updateCartUI();
+  render();
+  showToast(`✓ ${p.name.split(' ').slice(0,4).join(' ')} added!`);
+}
+
+function changeQty(id, d){
+  if(!cart[id]) return;
+  cart[id].cartQty += d;
+  if(cart[id].cartQty <= 0) delete cart[id];
+  updateCartUI(); render();
+}
+
+function removeItem(id){ delete cart[id]; updateCartUI(); render(); }
+
+function updateCartUI(){
+  const items = Object.values(cart);
+  const totalQty   = items.reduce((s,i) => s + i.cartQty, 0);
+  const totalPrice = items.reduce((s,i) => s + i.price * i.cartQty, 0);
+  const totalMrp   = items.reduce((s,i) => s + i.mrp   * i.cartQty, 0);
+
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = totalQty;
+  badge.classList.remove('badge-bump');
+  void badge.offsetWidth;
+  if(totalQty > 0) badge.classList.add('badge-bump');
+
+  document.getElementById('grandTot').textContent = '₹' + totalPrice;
+  document.getElementById('mrpTot').textContent   = '₹' + totalMrp;
+  document.getElementById('saveTot').textContent  = '₹' + (totalMrp - totalPrice);
+  document.getElementById('waBtn').disabled       = items.length === 0;
+
+  const wrap = document.getElementById('drawerItems');
+  if(!items.length){
+    wrap.innerHTML = `<div class="cart-empty-msg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Your cart is empty</p></div>`;
+    return;
+  }
+  wrap.innerHTML = items.map(i => `
+    <div class="ci">
+      <div class="ci-img">${i.image ? `<img src="${i.image}" alt="" loading="lazy">` : '🎨'}</div>
+      <div class="ci-info">
+        <div class="ci-name">${esc(i.name)}</div>
+        <div class="ci-price">₹${i.price} × ${i.cartQty} = ₹${i.price * i.cartQty}</div>
+      </div>
+      <div class="ci-ctrl">
+        <button class="q-btn" onclick="changeQty('${i.id}',-1)">−</button>
+        <span class="q-val">${i.cartQty}</span>
+        <button class="q-btn" onclick="changeQty('${i.id}',1)">+</button>
+        <button class="del-btn" onclick="removeItem('${i.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+}
+
+// ── WHATSAPP ORDER ──
+function sendOrder(){
+  const items = Object.values(cart);
+  if(!items.length) return;
+  const total = items.reduce((s,i) => s + i.price * i.cartQty, 0);
+  const note  = document.getElementById('noteInp').value.trim();
+  let msg = '🎨 *New Order — AP Art Store*\n\n*Items:*\n';
+  items.forEach(i => { msg += `• ${i.name} × ${i.cartQty} = ₹${i.price * i.cartQty}\n`; });
+  msg += `\n💰 *Total: ₹${total}*`;
+  if(note) msg += `\n\n📍 *Note:* ${note}`;
+  msg += '\n\nPlease confirm my order. Thank you! 🙏';
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ── DRAWER ──
+function openCart(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ── START ──
+updateCartUI();
+init();
+</script>
+</body>
+</html>
